@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="assets/icons/logo-black.png" sizes="any" />
+
+    <title>Login</title>
+
+
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/login_signup.css" />
+
+</head>
+
+<body>
+    <div class="login-container">
+        <div class="login-form">
+            <form onsubmit="return false;">
+                <!-- onsubmit="checkPassword(); return false;"> -->
+                <div>
+                    <h1>Log in</h1>
+                    <div class="underline"></div>
+                    <div class="input-container">
+                        <input id="enteredLoginEmail" type="email" aria-required="true" name="email" placeholder="Email" class="email" required="required" />
+                        <input id="enteredLoginPassword" type="password" aria-required="true" name="password" placeholder="Password" class="password" required="required" />
+                    </div>
+                    <div class="form-actions">
+                        <label>
+                            <input type="checkbox" checked="checked" name="remember"> Remember me
+                        </label>
+                        <a class="forgot-password" href="forgotPassword.html">Forgot my password</a>
+                    </div>
+                    <div class="button-container-login">
+                        <button class="login-button" onclick="checkPassword()">Log in</button>
+                        <div class="guest-login-button" onclick="initGuestJOIN()">Guest Log in</div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <div class="logo-layer">
+        <div class="logo-container">
+            <img src="assets/icons/logo-black.png" class="logo-big-static"/>
+        </div>
+    </div>
+    
+    <div class="sign-up-container">
+        <p>Not a Join user?</p>
+        <button class="sign-up-button" onclick="window.location.href='sign_up.html'">Sign up</button>
+    </div>
+
+    <script src="javascripts/storage.js"></script>
+    <script src="javascripts/includeHTML.js"></script>
+    <script src="javascripts/register.js"></script>
+    <script src="javascripts/index.js"></script>
+
+</body>
+
+</html>

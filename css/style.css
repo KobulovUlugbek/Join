@@ -1,0 +1,301 @@
+:root {
+  --blue: #2a3647;
+  --dark-blue: #091931;
+  --light-blue: #29abe2;
+  --urgent: #ff3d00;
+  --medium: #f9a400;
+  --low: #74d727;
+  --grey: #cdcdcd;
+}
+
+body {
+  margin: 0;
+  background-color: #f6f7f8;
+  font-family: "inter";
+  box-sizing: border-box;
+}
+
+.d-none {
+  display: none !important;
+}
+
+/*-----------sideMenu && header-----------*/
+
+.sideMenuContainer {
+  position: fixed;
+  bottom: 0;
+  background-color: var(--blue);
+  height: 100vh;
+  width: 232px;
+  z-index: 101;
+}
+
+.logoContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 60px;
+}
+
+.menuLogo {
+  height: 125px;
+}
+
+.textContainer {
+  padding-top: 100px;
+}
+.textContainer a {
+  text-decoration: none;
+}
+
+.menuText {
+  color: var(--grey);
+  display: flex;
+  align-items: center;
+  height: 46px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 40px;
+  font-size: 20px;
+}
+.menuText p {
+  text-decoration: none !important;
+}
+
+.menuText img {
+  height: 22px;
+  margin-right: 25px;
+}
+
+.menuText:hover {
+  cursor: pointer;
+  background-color: var(--dark-blue);
+}
+
+.selectedMenu {
+  background-color: var(--dark-blue) !important;
+}
+
+.menuGap {
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.menuGap a {
+  text-decoration: none;
+}
+
+header {
+  background: white;
+  position: fixed;
+  box-sizing: border-box;
+  top: 0;
+  width: 100vw;
+  height: 80px;
+  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2);
+  padding-right: 36px;
+  padding-left: 313px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 25px;
+  z-index: 101;
+}
+.header-logo {
+  height: 64%;
+  display: none;
+}
+
+.header-content-right {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 100px;
+}
+
+.myProfile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid var(--blue);
+  height: 52px;
+  width: 52px;
+  border-radius: 100%;
+}
+
+.myProfile:hover {
+  cursor: pointer;
+}
+
+.myProfile img {
+  height: 90%;
+  border-radius: 100%;
+}
+.logout {
+  position: absolute;
+  top: 60px;
+  right: 85px;
+  font-size: 21px;
+  border-radius: 20px 0 20px 20px;
+  background-color: var(--blue);
+  color: white;
+  text-decoration: none;
+  z-index: 999;
+}
+.logout a {
+  text-decoration: none;
+}
+.logout:hover {
+  cursor: pointer;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.popupMobile {
+  font-size: 21px;
+  padding: 8px 16px 8px 16px;
+  border-radius: 20px 0 20px 20px;
+  background-color: var(--blue);
+  color: white;
+  text-decoration: none;
+  z-index: 9999;
+}
+.popupMobile:hover {
+  transform: scale(1.02);
+  background-color: var(--light-blue);
+}
+#logoutLayer {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  right: 0;
+  top: 0;
+}
+/*-------sideMenu && header end----------*/
+
+@media (max-width: 850px) {
+  .menuText {
+    padding-left: 24px;
+  }
+  .sideMenuContainer {
+    width: 200px;
+  }
+  header {
+    padding-left: 240px;
+  }
+  header p {
+    margin: 0;
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 670px) {
+  .hideMobile {
+    display: none !important;
+  }
+  .showMobile {
+    display: block !important;
+  }
+  .logout {
+    padding: 8px;
+  }
+  .popupMobile {
+    border-radius: 10px 0 10px 10px;
+  }
+  header p {
+    display: none;
+  }
+  header {
+    padding-left: 36px;
+    padding-right: 0;
+  }
+  .header-logo {
+    display: flex;
+  }
+  .logoContainer {
+    display: none;
+  }
+  .sideMenuContainer {
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    height: 80px;
+  }
+  .menuGap {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .textContainer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0px;
+  }
+  .textContainer a {
+    contain: content;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .menuText {
+    padding: 16px 8px 16px 8px;
+    flex-direction: column;
+  }
+  .menuText img {
+    margin: 0px;
+  }
+}
+
+@media (max-width: 385px) {
+  .menuText {
+    font-size: 16px;
+  }
+}
+
+/*-------------fonts------------*/
+
+@font-face {
+  font-display: swap;
+  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../assets/fonts/inter-v12-latin-regular.eot");
+  /* IE9 Compat Modes */
+  src: url("../assets/fonts/inter-v12-latin-regular.eot?#iefix")
+      format("embedded-opentype"),
+    /* IE6-IE8 */ url("../assets/fonts/inter-v12-latin-regular.woff2")
+      format("woff2"),
+    /* Super Modern Browsers */
+      url("../assets/fonts/inter-v12-latin-regular.woff") format("woff"),
+    /* Modern Browsers */ url("../assets/fonts/inter-v12-latin-regular.ttf")
+      format("truetype"),
+    /* Safari, Android, iOS */
+      url("../assets/fonts/inter-v12-latin-regular.svg#Inter") format("svg");
+  /* Legacy iOS */
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #a8a8a8;
+  border-radius: 3px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555555;
+}

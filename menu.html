@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Dropdown Menu Example</title>
+    <style>
+      .dropdown-content {
+        display: none;
+      }
+
+      .dropdown-content a {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .show {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .selected {
+        background-color: yellow;
+        width: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="dropdown">
+      <button class="dropbtn" onclick="toggleDropdown()">Menu</button>
+      <div class="dropdown-content" id="myDropdown">
+        <div onclick="handleClick(this)">Item 1</div>
+        <div onclick="handleClick(this)">Item 2</div>
+        <div onclick="handleClick(this)">Item 3</div>
+      </div>
+    </div>
+
+    
+
+    <script>
+      let selectedItem = null;
+
+      function toggleDropdown() {
+        let dropdown = document.getElementById("myDropdown");
+        dropdown.classList.toggle("show");
+      }
+
+      function handleClick(element) {
+        if (selectedItem) {
+          selectedItem.classList.remove("selected");
+        }
+        element.classList.add("selected");
+        selectedItem = element;
+
+        console.log(element.innerText);
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="assets/icons/logo-black.png" sizes="any" />
+
+    <title>Summary</title>
+
+    <script src="javascripts/storage.js"></script>
+    <script src="javascripts/includeHTML.js"></script>
+    <script src="javascripts/index.js"></script>
+    <script src="javascripts/boardHTML.js"></script>
+    <script src="javascripts/board.js"></script>
+    <script src="javascripts/summary.js"></script>
+
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/task.css" />
+    <link rel="stylesheet" href="css/summary.css" />
+</head>
+
+<body onload="startSummary()">
+    <div w3-include-html="assets/templates/menu+header.html"></div>
+    <div class="overlay"></div>
+    <div class="overallContainer">
+        <div class="rightContainer">
+            <div id="greeting" class="greeting">
+                <div id="greetingText" class="greetingText "></div>
+                <div id="greetingName" class="greetingName"></div>
+            </div>
+            <div class="summaryContainer">
+                <div class="headline">
+                    <div class="summary" style="font-size: 30px;">Summary</div>
+                    <div class="blueVerticalLine"></div>
+                    <div class="textHeadline">Everything in a nutshell!</div>
+                </div>
+            </div>
+            <div class="tasksOverallContainer">
+                <div class="tasksContainer" onclick="jumpToBoard()">
+                    <div id="tasksInBoard" class="sumTasksInBorad tasksCount">5</div>
+                    <div class="tasksText"> Tasks in <br/> Board</div>
+                </div>
+                <div class="tasksContainer" onclick="jumpToBoard()">
+                    <div id="tasksInProgress" class="sumTasksInProgress tasksCount">4</div>
+                    <div class="tasksText">Tasks in Progress</div>
+                </div>
+                <div class="tasksContainer" onclick="jumpToBoard()">
+                    <div id="tasksAwaitingFeedback" class="sumTasksAwaitingFeedback tasksCount">2</div>
+                    <div class="tasksText">Awaiting Feedback</div>
+                </div>
+            </div>
+            <div class="dueDateContainer">
+                <div class=" priority " onclick="jumpToBoard()">
+                    <div class="urgentContainer ">
+                        <div class="iconUrgent ">
+                            <img src="assets/icons/urgent_.png " class="icon urgentIcon ">
+                        </div>
+                        <div class="sumUrgentContainer">
+                            <div id="sumUrgent" class="sumUrgent ">10</div>
+                            <div class="textUrgent">Urgent</div>
+                        </div>
+                    </div>
+                    <div class="greyVerticalLine"></div>
+                    <div class="deadline ">
+                        <div id="dateDeadline" class="dateDeadline ">Oktober 16, 2022</div>
+                        <div class="textDeadline">Upcoming Deadline</div>
+                    </div>
+                </div>
+                <div id="greeting2" class="greeting2 ">
+                    <div id="greetingText2" class="greetingText"></div>
+                    <div id="greetingName2" class="greetingName "></div>
+                </div>
+            </div>
+            <div class="toDoDoneContainer ">
+                <div class="toDoContainer " onclick="jumpToBoard()">
+                    <div class="iconToDo">
+                        <!-- <img src="assets/icons/pencil.png " class="pencilIcon "> -->
+                    </div>
+                    <div class="sumToDoContainer " onclick="jumpToBoard()">
+                        <div id="sumToDo" class="sumToDo">6</div>
+                        <div class="textToDo">To-do</div>
+                    </div>
+                </div>
+                <div class="doneContainer" onclick="jumpToBoard()">
+                    <div class="iconDone">
+                        <!-- <img src="assets/icons/checkmark_.png " class="checkIcon "> -->
+                    </div>
+                    <div class="sumDoneContainer ">
+                        <div id="sumDone" class="sumDone">6</div>
+                        <div class="textDone">Done</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>

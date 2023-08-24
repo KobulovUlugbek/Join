@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="assets/icons/logo-black.png"
+      sizes="any"
+    />
+
+    <title>Join</title>
+
+    <script src="javascripts/includeHTML.js"></script>
+    <script src="javascripts/categoryColor.js"></script>
+    <script src="javascripts/storage.js"></script>
+    <script src="javascripts/addTask.js"></script>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/task.css" />
+  </head>
+
+  <body onload="addContactNamesToAssignedTo(),addCategories()">
+    <div class="taskFormOverlay">
+      <div id="taskForm" class="task-form">
+        <div class="task-head">
+          <h1>Add Task</h1>
+          <img class="pointer" src="assets/icons/clear.png" />
+        </div>
+
+        <div class="task-section">
+          <div class="content-left">
+            <div>
+              <p>Title</p>
+              <input id="addTaskTitle" placeholder="Enter a title" />
+            </div>
+            <div>
+              <p>Description</p>
+              <textarea
+                id="addTaskDescription"
+                placeholder="Enter a Description"
+                style="resize: none"
+              ></textarea>
+            </div>
+            <div>
+              <p>Category</p>
+              <div class="content">
+                <div
+                  onclick="openDropdownCategory()"
+                  id="addTaskCategory"
+                  class="selectContainer"
+                >
+                  Select task Category
+                </div>
+                <div class="expand-container">
+                  <div id="categoryDropdown">
+                    <div onclick="selectOptionCategory()" class="option">
+                      New Category
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <p>Assigned to</p>
+              <div class="content">
+                <div
+                  onclick="openDropdownContacts()"
+                  id="selectContact"
+                  class="selectContainer"
+                >
+                  Select contacts to assign
+                </div>
+                <div class="expand-container">
+                  <div id="selectContactDropdown"></div>
+                </div>
+                <div
+                  id="chosenContacts"
+                  class="chosenContacts chosenContactsForm"
+                ></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="content-right">
+            <div>
+              <p>Due date</p>
+              <input
+                required
+                id="date"
+                class="input pointer"
+                type="date"
+                value="dd/mm/yyyy"
+              />
+            </div>
+            <div>
+              <p>Prio</p>
+              <div class="prio-section">
+                <div
+                  id="urgentTask"
+                  onclick="setPrio('urgent')"
+                  class="prio-btn pointer"
+                >
+                  Urgent <img id="urgentIcon" src="assets/icons/urgent.png" />
+                </div>
+                <div
+                  id="mediumTask"
+                  onclick="setPrio('medium')"
+                  class="prio-btn pointer"
+                >
+                  Medium <img id="mediumIcon" src="assets/icons/medium.png" />
+                </div>
+                <div
+                  id="lowTask"
+                  onclick="setPrio('low')"
+                  class="prio-btn pointer"
+                >
+                  Low <img id="lowIcon" src="assets/icons/low.png" />
+                </div>
+              </div>
+            </div>
+            <div>
+              <p>Subtasks</p>
+              <input
+                id="addTaskSubtask"
+                class="input"
+                type="text"
+                placeholder="Add new subtask"
+              />
+              <div class="new-subtask">
+                <input type="checkbox" />
+                <p>Subtask 1</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="button-container btn-container-form">
+          <button onclick="resetValues()" class="clear-btn pointer">
+            Clear &nbsp; x
+          </button>
+          <button
+            id="createTaskBtn"
+            class="create-btn pointer"
+            onclick="createTask()"
+          >
+            Create Task <img src="assets/icons/check-white.png" />
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

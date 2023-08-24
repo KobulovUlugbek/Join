@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign-Up</title>
+
+    <link rel="icon" type="image/png" href="assets/icons/logo-black.png" sizes="any" />
+
+    <script src="javascripts/index.js"></script>
+    <script src="/javascripts/storage.js"></script>
+    <script src="/javascripts/register.js"></script>
+
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/login_signup.css" />
+</head>
+
+<body onload="changeArrowColor()">
+    <div class="signup-container">
+        <div class="signup-form">
+            <form onsubmit="register(); return false">
+                <h1>Sign up</h1>
+                <div class="underline underline-signup"></div>
+                <div class="signup-input-container">
+                    <input id="signupName" type="text" aria-required="true" name="name" placeholder="Name" class="nameInput" required="required" />
+                    <input id="signupEmail" type="email" aria-required="true" name="email" placeholder="Email" class="email" required="required" />
+                    <input id="signupPassword" type="password" aria-required="true" name="password" placeholder="Password" class="password" required="required" />
+                </div>
+
+                <div class="button-container-login">
+                    <button id="registerBtn" class="login-button form-signup-button">Sign up</button>
+                </div>
+                <button class="return-to-login-btn" onclick="window.location.href='login.html'"><img id="blueArrowLeft" src="assets/icons/arrow-left.png"></button>
+            </form>
+        </div>
+    </div>
+
+
+    <img src="assets/icons/logo-black.png" class="signup-logo" />
+</body>
+
+</html>

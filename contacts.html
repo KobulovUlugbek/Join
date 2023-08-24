@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="assets/icons/logo-black.png"
+      sizes="any"
+    />
+
+    <title>Contacts</title>
+
+    <script src="javascripts/categoryColor.js"></script>
+    <script src="javascripts/includeHTML.js"></script>
+    <script src="javascripts/storage.js"></script>
+    <script src="javascripts/addContacts.js"></script>
+    <script src="javascripts/index.js"></script>
+
+    <link rel="stylesheet" href="css/contacts.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body onload="includeHTML('contactsMenu'), initContactList()">
+    <div w3-include-html="assets/templates/menu+header.html"></div>
+    <div class="contacts-content">
+      <div id="contactList" class="contact-list"></div>
+      <div id="contactsRight" class="contacts-content-right">
+        <div class="contacts-top-mid">
+          <div class="contacts-top">
+            <div class="contacts-top-head">
+              <h1>Contacts</h1>
+            </div>
+            <div class="contacts-top-text">Better with a Team</div>
+          </div>
+          <div id="contactsMid" class="contacts-mid"></div>
+        </div>
+      </div>
+    </div>
+    <button
+      id="newContactBtn"
+      class="new-contact-btn"
+      onclick="openNewContact()"
+    >
+      New contact &nbsp; <img src="assets/icons/new.contact.png" />
+    </button>
+
+    <div id="changedContact" class="contactCreated">
+      Contact successfully created
+    </div>
+
+    <!---   new Contact window    --->
+
+    <div class="d-none" id="addContactsOverlay">
+   
+      <div class="addContact" >
+        <div class="addContactLeft">
+          <img src="assets/icons/logo-white-blue.png" />
+          <h1>Add contact</h1>
+          <p>Tasks are better with a team</p>
+          <div class="blueLine"></div>
+        </div>
+        <div class="addContactRight" >
+          <div onclick="closeNewContact()" class="x-mark">x</div>
+          <div class="createContactContainer">
+            <div>
+              <img class="contactImage" src="assets/icons/add_contact.png" />
+            </div>
+            <form class="contactForm" onsubmit="event.preventDefault(); addContact()">
+            <div class="contactInputContainer">
+              <input
+              required
+                id="newContactName"
+                class="addContactInput contactName"
+                placeholder="Name"
+                type="text"
+              />
+              <input
+              required
+                id="newContactPhone"
+                class="addContactInput contactPhone"
+                placeholder="Phone"
+                type="number"
+              />
+              <input
+              required
+                id="newContactEmail"
+                class="addContactInput contactEmail"
+                placeholder="Email"
+                type="email"
+              />
+            </div>
+          </div>
+          <div class="addContactBtn">
+            <button  type="button" onclick="closeNewContact()" class="cancel-btn hideMobile">
+              Cancel &nbsp; x
+            </button>
+            <button type="submit" class="create-contact-btn">
+              Create Contact &nbsp;
+              <img src="assets/icons/check-white.png" />
+            </button>
+          </div>
+        </form>
+        </div>
+      </div>
+
+    </div>
+
+    <!--- edit contacts Window --->
+
+    <div class="d-none" id="editContactsOverlay">
+      
+    </div>
+  </body>
+</html>
