@@ -63,7 +63,7 @@ function getInitials(name) {
 
 /* Token Generator: https://remote-storage.developerakademie.org/token-generator */
 
-const STORAGE_TOKEN = "HT0S0N13Y0K6B2YIWFIVXQ2L8P2T85JJ2LNGCLH0";
+const STORAGE_TOKEN = "L82LWDOWPZ2XHLJOJVX0WZP0N1H180TB75FGKNCH";
 const STORAGE_URL = "https://remote-storage.developerakademie.org/item";
 
 async function setItem(key, value) {
