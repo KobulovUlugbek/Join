@@ -1,5 +1,11 @@
 let subtaskCount = 0;
 
+/**
+ * Generates the HTML structure for a task card element.
+ * @param {number} i - Index of the task in remoteTasksAsJSON array.
+ * @param {string} cardID - ID of the generated task card.
+ * @returns {string} HTML markup for the task card.
+ */
 function taskCardHTML(i, cardID) {
   return /* html */ `
   <div draggable="true" ondragstart="startDragging(${i})"  class="task-card" id="${cardID}" onclick="openTaskCard(${i}, '${cardID}')">
@@ -43,6 +49,12 @@ function taskCardHTML(i, cardID) {
   </div>`;
 }
 
+/**
+ * Generates the HTML structure for an open task card element.
+ * @param {number} i - Index of the task in remoteTasksAsJSON array.
+ * @param {string} cardID - ID of the open task card.
+ * @returns {string} HTML markup for the open task card.
+ */
 function openTaskCardHTML(i, cardID) {
   return /* html */ `
     <div class="task-card-big" id="${cardID}">
@@ -78,6 +90,11 @@ function openTaskCardHTML(i, cardID) {
   `;
 }
 
+/**
+ * Generates the HTML structure for editing a task card.
+ * @param {number} taskIndex - Index of the task in remoteTasksAsJSON array.
+ * @returns {string} HTML markup for editing a task card.
+ */
 function editTaskCardHTML(taskIndex) {
   return /* html */ `
       <div class="task-section-edit">
@@ -162,7 +179,13 @@ function editTaskCardHTML(taskIndex) {
         
   `;
 }
-
+/**
+ * Generates the HTML structure for the assigned contact row in a task card.
+ * @param {string} contactColor - Color of the contact's initials label background.
+ * @param {string} initials - Initials of the assigned contact.
+ * @param {string} assignedToName - Name of the assigned contact.
+ * @returns {string} HTML markup for the assigned contact row.
+ */
 function assignedToHTML(contactColor, initials, assignedToName) {
   return `
   <div class="assignedTo-row">
@@ -171,12 +194,23 @@ function assignedToHTML(contactColor, initials, assignedToName) {
   `;
 }
 
+/**
+ * Generates the HTML structure for the assigned contact initials label in a task card.
+ * @param {string} contactColor - Color of the contact's initials label background.
+ * @param {string} initials - Initials of the assigned contact.
+ * @returns {string} HTML markup for the assigned contact initials label.
+ */
 function assignedToCardHTML(contactColor, initials) {
   return `
   <div class="initial-label-card" style="background-color:${contactColor}">${initials}</div>
   `;
 }
 
+/**
+ * Generates the HTML structure for the slide-in container used for creating tasks.
+ * @param {string} status - Status of the task.
+ * @returns {string} HTML markup for the slide-in container.
+ */
 function slideInHTML(status) {
   return /* html */ `
       <div id="slideInContainer" class="task-form">
@@ -325,6 +359,13 @@ function slideInHTML(status) {
   `;
 }
 
+/**
+ * Generates the HTML structure for a subtask.
+ * @param {string} inputFieldValue - Text content of the subtask.
+ * @param {number} i - Index of the subtask.
+ * @param {string} subtaskStatus - Status of the subtask.
+ * @returns {string} HTML markup for the subtask.
+ */
 function subtaskHTML(inputFieldValue, i, subtaskStatus) {
   subtaskCount++;
   return /* html */ `

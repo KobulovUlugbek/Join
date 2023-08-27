@@ -59,7 +59,7 @@ function getInitials(name) {
     return initials;
 }
 
-/* ****************************************************************+ */
+/* ****************************************************************+   HT0S0N13Y0K6B2YIWFIVXQ2L8P2T85JJ2LNGCLH0*/
 
 /* Token Generator: https://remote-storage.developerakademie.org/token-generator */
 

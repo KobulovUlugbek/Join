@@ -1,20 +1,61 @@
+/**
+ * Index of the currently open task card.
+ * @type {number}
+ */
 let openTaskIndex;
+
+/**
+ * ID of the currently open task.
+ * @type {string}
+ */
 let openTaskID;
+
+/**
+ * Array to store assigned contacts for a task.
+ * @type {Array}
+ */
 let assignedToArray;
+
+/**
+ * Array to store the tasks retrieved from remote data.
+ * @type {Array}
+ */
 let remoteTasksAsJSON;
+
+/**
+ * Array to store assigned contact names for a task.
+ * @type {Array}
+ */
 let assignedContactNames = [];
 
+/**
+ * Initializes the board by fetching remote data and rendering task cards for different statuses.
+ * Also handles button visibility and checks if status containers are empty.
+ * @async
+ */
 async function initBoard() {
+  // Fetch tasks and categories from remote data
   remoteTasksAsJSON = await getRemoteData("tasksRemote");
   remoteCategoryAsJSON = await getRemoteData("categoryRemote");
+
+  // Render task cards for different statuses
   renderTaskCards("todo", "todo");
   renderTaskCards("inProgress", "inProgress");
   renderTaskCards("awaitingFeedback", "awaitingFeedback");
   renderTaskCards("done", "done");
+
+  // Toggle button visibility based on open task and assigned contacts
   toggleButtonVisibility();
+
+  // Check if status containers are empty
   isEmptyStatusContainer();
 }
 
+/**
+ * Renders the category label color for a task based on its category.
+ * @param {number} i - Index of the task in the remoteTasksAsJSON array.
+ * @returns {string|null} - Color code of the category label, or null if not found.
+ */
 function renderCategoryLabelColor(i) {
   let categoryName =
     remoteTasksAsJSON[i]["category"].charAt(0).toUpperCase() +
@@ -24,6 +65,11 @@ function renderCategoryLabelColor(i) {
   return labelColor;
 }
 
+/**
+ * Finds the color associated with a category name from the remoteCategoryAsJSON array.
+ * @param {string} categoryName - Name of the category.
+ * @returns {string|null} - Color code of the category, or null if not found.
+ */
 function findColorByName(categoryName) {
   for (let i = 0; i < remoteCategoryAsJSON.length; i++) {
     if (remoteCategoryAsJSON[i].name === categoryName) {
@@ -33,6 +79,11 @@ function findColorByName(categoryName) {
   return null;
 }
 
+/**
+ * Renders task cards within a specified container for a given status.
+ * @param {string} container - ID of the container to render task cards in.
+ * @param {string} status - Status of the tasks to be rendered.
+ */
 function renderTaskCards(container, status) {
   let cardIndex = 0;
   document.getElementById(container).innerHTML = "";
@@ -49,20 +100,33 @@ function renderTaskCards(container, status) {
   }
 }
 
+/**
+ * Retrieves and renders the description of a task.
+ * @param {number} i - Index of the task in the remoteTasksAsJSON array.
+ * @returns {string} - Description of the task.
+ */
 function renderTaskDescription(i) {
   let description = remoteTasksAsJSON[i]["description"];
   return description;
 }
 
-function isEmptyStatusContainer(){
+/**
+ * Checks if a status container is empty and adjusts its min-height if necessary.
+ */
+function isEmptyStatusContainer() {
   let statusContainers = document.querySelectorAll('.statusContainer');
-  statusContainers.forEach( c => {
+  statusContainers.forEach(c => {
     if (c.innerHTML == '') {
       c.style.minHeight = '100px';
     }
   })
 }
 
+/**
+ * Opens the task card with detailed information and assigns the provided index and cardID.
+ * @param {number} i - Index of the task in the remoteTasksAsJSON array.
+ * @param {string} cardID - ID of the task card.
+ */
 function openTaskCard(i, cardID) {
   const taskLayer = document.getElementById("taskLayer");
   taskLayer.style.zIndex = "1";
@@ -80,6 +144,11 @@ function openTaskCard(i, cardID) {
   fillAssignedContactNames();
 }
 
+
+
+/**
+ * Fills the assignedContactNames array with contact names from assignedToContainer.
+ */
 function fillAssignedContactNames() {
   let assignedToContainer = document.querySelectorAll(".assignedTo-row p");
   assignedToContainer.forEach((container) => {
@@ -88,6 +157,10 @@ function fillAssignedContactNames() {
   });
 }
 
+/**
+ * Opens the edit form for a task card and pre-fills the fields with task information.
+ * @param {number} taskIndex - Index of the task in the remoteTasksAsJSON array.
+ */
 function editTaskCard(taskIndex) {
   let openCardContainer = document.querySelector(".task-card-big");
   openCardContainer.innerHTML = editTaskCardHTML(taskIndex);
@@ -98,6 +171,9 @@ function editTaskCard(taskIndex) {
   excludeNamesInDropdown();
 }
 
+/**
+ * Excludes assigned contact names from the contact dropdown options.
+ */
 function excludeNamesInDropdown() {
   for (let i = 0; i < assignedContactNames.length; i++) {
     const name = assignedContactNames[i];
@@ -113,7 +189,10 @@ function excludeNamesInDropdown() {
   }
 }
 
-
+/**
+ * Fills the edit form fields with task information for editing.
+ * @param {number} taskIndex - Index of the task in the remoteTasksAsJSON array.
+ */
 function fillEditFields(taskIndex) {
   let titleInputField = document.getElementById("addTaskTitle");
   let descriptionInputField = document.getElementById("addTaskDescription");
@@ -130,6 +209,10 @@ function fillEditFields(taskIndex) {
   renderAssignedToEdit();
 }
 
+/**
+ * Saves the changes made to a task card and updates the task in the remoteTasksAsJSON array.
+ * Also updates the assignedContacts array and re-initializes the board.
+ */
 async function saveChanges() {
   const titleInputFieldValue = document.getElementById("addTaskTitle").value;
   const descriptionInputFieldValue = document.getElementById("addTaskDescription").value;
@@ -156,6 +239,9 @@ async function saveChanges() {
   await initBoard();
 }
 
+/**
+ * Updates the status of subtasks in the remoteTasksAsJSON array based on their checkbox status.
+ */
 function loadSubtasks() {
   let subtaskContainer = document.getElementById("editSubtaskContainer");
 
@@ -171,6 +257,10 @@ function loadSubtasks() {
   }
 }
 
+/**
+ * Pushes contacts from assignedToArray into the assignedContacts array.
+ * @param {Array} assignedToArray - Array of contacts assigned to a task.
+ */
 function pushToAssignedContact(assignedToArray) {
   for (let i = 0; i < assignedToArray.length; i++) {
     const contact = assignedToArray[i];
@@ -178,6 +268,9 @@ function pushToAssignedContact(assignedToArray) {
   }
 }
 
+/**
+ * Renders assigned contact names and initials for editing a task.
+ */
 function renderAssignedToEdit() {
   let chosenContacts = document.getElementById("chosenContacts");
   for (let i = 0; i < assignedContacts.length; i++) {
@@ -200,6 +293,9 @@ function renderAssignedToEdit() {
   }
 }
 
+/**
+ * Renders the closing arrow based on window width.
+ */
 function renderClosingArrow() {
   let arrow = document.querySelector(".task-card-arrow");
   if (window.innerWidth > 670) {
@@ -209,6 +305,9 @@ function renderClosingArrow() {
   }
 }
 
+/**
+ * Renders the close button based on window width.
+ */
 function renderCloseBtn() {
   const closeBtn = document.querySelector(".task-card-closeBtn");
   if (window.innerWidth > 670) {
@@ -218,6 +317,11 @@ function renderCloseBtn() {
   }
 }
 
+/**
+ * Deletes a task card from the board and updates the remoteTasksAsJSON array.
+ * @param {number} cardIndex - Index of the card in the remoteTasksAsJSON array.
+ * @param {string} cardID - ID of the card element.
+ */
 async function deleteCard(cardIndex, cardID) {
   const card = document.getElementById(cardID);
   card.remove();
@@ -230,11 +334,20 @@ async function deleteCard(cardIndex, cardID) {
   document.body.style.overflow = "auto";
 }
 
+/**
+ * Retrieves remote data from local storage using the specified key.
+ * @param {string} key - The key to retrieve data from local storage.
+ * @returns {Promise} - A promise containing the parsed JSON data.
+ */
 async function getRemoteData(key) {
   let res = await getItem(key);
   return JSON.parse(res.data.value.replace(/'/g, '"'));
 }
 
+/**
+ * Clears the HTML content of specified container elements.
+ * @param {Array} containerIds - Array of container element IDs to clear.
+ */
 function clearContainers(containerIds) {
   containerIds.forEach((containerId) => {
     const container = document.getElementById(containerId);
@@ -242,6 +355,11 @@ function clearContainers(containerIds) {
   });
 }
 
+/**
+ * Renders the urgency icon based on the priority of the task.
+ * @param {number} i - Index of the task in remoteTasksAsJSON array.
+ * @returns {string} - Path to the urgency icon image.
+ */
 function renderUrgencyImg(i) {
   const urgency = remoteTasksAsJSON[i]["priority"];
   if (urgency == "urgent") {
@@ -253,6 +371,11 @@ function renderUrgencyImg(i) {
   }
 }
 
+/**
+ * Renders the urgency label based on the priority of the task.
+ * @param {number} i - Index of the task in remoteTasksAsJSON array.
+ * @returns {string} - Path to the urgency label image.
+ */
 function renderUrgencyLabel(i) {
   const urgency = remoteTasksAsJSON[i]["priority"];
   if (urgency == "urgent") {
@@ -264,6 +387,11 @@ function renderUrgencyLabel(i) {
   }
 }
 
+/**
+ * Renders the assigned contact names and initials for a task.
+ * @param {number} taskID - Index of the task in remoteTasksAsJSON array.
+ * @param {string} containerClass - Class name of the container to render the assigned contacts.
+ */
 function renderAssignedTo(taskID, containerClass) {
   const container = document.getElementById(containerClass);
   const assignedToArray = remoteTasksAsJSON[taskID]["assignedTo"];
@@ -281,6 +409,9 @@ function renderAssignedTo(taskID, containerClass) {
   }
 }
 
+/**
+ * Displays the task layer and handles the click event to close the layer.
+ */
 function displayLayer() {
   let layer = document.getElementById("taskLayer");
   layer.style.display = "flex";
@@ -295,6 +426,9 @@ function displayLayer() {
   });
 }
 
+/**
+ * Closes the slide-in container, the task layer, and the task card modal.
+ */
 function closeSlideInBtn() {
   closeSlideInContainer();
   closeLayer();
@@ -302,6 +436,10 @@ function closeSlideInBtn() {
   document.body.style.overflow = "auto";
 }
 
+
+/**
+ * Closes the slide-in container and adjusts the layer visibility.
+ */
 function closeSlideInContainer() {
   const slideInContainer = document.getElementById("slideInContainer");
   const taskLayer = document.getElementById("taskLayer");
@@ -311,6 +449,9 @@ function closeSlideInContainer() {
   }
 }
 
+/**
+ * Closes the expanded task card modal.
+ */
 function closeTaskCardBig() {
   const taskCardBig = document.querySelector(".task-card-big");
   if (taskCardBig) {
@@ -318,6 +459,9 @@ function closeTaskCardBig() {
   }
 }
 
+/**
+ * Closes the task layer and resets associated variables.
+ */
 function closeLayer() {
   let layer = document.getElementById("taskLayer");
   setTimeout(() => {
@@ -328,6 +472,10 @@ function closeLayer() {
   assignedContactNames = [];
 }
 
+/**
+ * Displays the slide-in container for a specific task status.
+ * @param {string} status - Status of the task.
+ */
 function slideInContainer(status) {
   displayLayer();
   const taskLayer = document.getElementById("taskLayer");
@@ -344,12 +492,18 @@ function slideInContainer(status) {
   document.body.style.overflow = "hidden";
 }
 
+/**
+ * Filters task cards based on the search input.
+ */
 document.addEventListener("input", function (event) {
   if (event.target.id === "searchInput") {
     filterCards();
   }
 });
 
+/**
+ * Filters task cards based on the search input value.
+ */
 function filterCards() {
   const query = document.getElementById("searchInput").value.toLowerCase();
   const cards = document.querySelectorAll(".task-card");
@@ -365,6 +519,11 @@ function filterCards() {
   });
 }
 
+/**
+ * Counts the number of subtasks that are marked as "done" for a given task.
+ * @param {number} i - Index of the task in remoteTasksAsJSON array.
+ * @returns {number} - Count of completed subtasks.
+ */
 function countDoneSubtasks(i) {
   let doneSubtasks = remoteTasksAsJSON[i]["subtasks"].filter(
     (subtask) => subtask.status === "done"
@@ -373,6 +532,11 @@ function countDoneSubtasks(i) {
   return doneSubtasksCount;
 }
 
+/**
+ * Calculates and returns the progress percentage of completed subtasks for a task.
+ * @param {number} i - Index of the task in remoteTasksAsJSON array.
+ * @returns {number} - Progress percentage.
+ */
 function renderProgress(i) {
   let doneCount = countDoneSubtasks(i);
   let subtaskLength = remoteTasksAsJSON[i]["subtasks"].length;
@@ -388,10 +552,18 @@ function renderProgress(i) {
 
 let currentDraggedElement;
 
+/**
+ * Initiates the dragging operation for a task.
+ * @param {number} i - Index of the task in remoteTasksAsJSON array.
+ */
 function startDragging(i) {
   currentDraggedElement = i;
 }
 
+/**
+ * Moves a task to the specified status and updates the data accordingly.
+ * @param {string} status - New status of the task.
+ */
 async function moveTo(status) {
   remoteTasksAsJSON[currentDraggedElement]["status"] = status;
   await setItem("tasksRemote", remoteTasksAsJSON);
@@ -400,22 +572,37 @@ async function moveTo(status) {
   removeHighlight(status);
 }
 
+/**
+ * Allows dropping tasks by preventing the default behavior.
+ * @param {Event} ev - The dragover event object.
+ */
 function allowDrop(ev) {
   ev.preventDefault();
 }
 
+/**
+ * Highlights the drop container when a task is dragged over it.
+ * @param {string} id - ID of the drop container.
+ */
 function highlight(id) {
   let container = document.getElementById(id);
   container.style.transition = "background-color 0.5s";
   container.style.backgroundColor = "#d1d1d1";
 }
 
+/**
+ * Removes the highlight from the drop container.
+ * @param {string} id - ID of the drop container.
+ */
 function removeHighlight(id) {
   let container = document.getElementById(id);
   container.style.transition = "background-color 0.5s";
   container.style.backgroundColor = "#f6f7f8";
 }
 
+/**
+ * Highlights all drop containers for better visibility during drag-and-drop.
+ */
 function highlightAll() {
   let statusContainers = document.querySelectorAll(".statusContainer");
   statusContainers.forEach((container) => {
@@ -423,6 +610,10 @@ function highlightAll() {
     container.style.transition = "border 0.5s";
   });
 }
+
+/**
+ * Removes the highlight from all drop containers.
+ */
 
 function removeHighlightAll() {
   let statusContainers = document.querySelectorAll(".statusContainer");
@@ -434,6 +625,11 @@ function removeHighlightAll() {
   }
 }
 
+/**
+ * Toggles the display of a dropdown menu for a task.
+ * @param {Event} event - The click event object.
+ * @param {number} i - Index of the task in remoteTasksAsJSON array.
+ */
 function toggleDropdown(event, i) {
   event.stopPropagation();
   let dropdownContent = document.getElementById(`dropdown-content${i}`);
@@ -460,6 +656,14 @@ function toggleDropdown(event, i) {
   }
 }
 
+/**
+ * Handles the selection of an option from the dropdown menu for task status.
+ * Updates the task's status and triggers data updates.
+ * @param {Event} event - The click event object.
+ * @param {number} option - The selected option (1 to 4).
+ * @param {number} i - Index of the task in remoteTasksAsJSON array.
+ * @param {string} status - New status of the task.
+ */
 async function selectOption(event, option, i, status) {
   event.stopPropagation();
   let dropdownBtn = document.getElementById(`dropdown-btn${option}`);
@@ -474,6 +678,10 @@ async function selectOption(event, option, i, status) {
   }
 }
 
+/**
+ * Toggles the visibility of dropdown buttons based on window width.
+ * Displays the buttons on smaller screens and hides on larger screens.
+ */
 function toggleButtonVisibility() {
   const button = document.getElementById("dropdown-btn${i}");
   let buttons = document.querySelectorAll(".dropdown-btn");
@@ -486,4 +694,5 @@ function toggleButtonVisibility() {
   });
 }
 
+// Listen for window resize events and adjust button visibility accordingly
 window.addEventListener("resize", toggleButtonVisibility);
