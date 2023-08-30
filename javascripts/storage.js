@@ -11,14 +11,97 @@ let contacts = [{
         phone: "+49 12345678",
     },
     {
-        name: "Anywhere",
+        name: "Max",
         color: "#CB02CF",
-        email: "beck@hotmail",
+        email: "max@hotmail",
+        phone: "+49 12345678",
+    },
+    {
+        name: "John",
+        color: "#0223CF",
+        email: "john@gmail.com",
+        phone: "+49 12345678",
+    },
+    {
+        name: "Jack",
+        color: "#FF7A00",
+        email: "jack@hotmail",
+        phone: "+49 12345678",
+    },
+    {
+        name: "Johan",
+        color: "#1FD7C1",
+        email: "johan@hotmail",
         phone: "+49 12345678",
     }
 ];
 
-let tasks = [];
+let tasks = [{
+        title: "Call potential clients",
+        description: "Make the product presentation to prospective buyers",
+        status: "todo",
+        category: "design",
+        priority: "urgent",
+        subtasks: [
+            { name: "Follow up with leads", status: "inProgress" },
+            { name: "Schedule product demos", status: "done" }
+        ],
+        dueDate: "2022-08-15",
+        assignedTo: [contacts[0], contacts[2]],
+    },
+  /*   {
+        title: "Organize Financial Records",
+        description: "Review and organize financial records, including invoices, receipts, and expense reports, to ensure accurate bookkeeping and easy retrieval for auditing purposes",
+        status: "todo",
+        category: "backoffice",
+        priority: "urgent",
+        subtasks: [
+            { name: "Sort and file invoices", status: "inProgress" },
+            { name: "Create expense reports", status: "inProgress" }
+        ],
+        dueDate: "2022-08-16",
+        assignedTo: [contacts[0], contacts[1], contacts[2]],
+    }, */
+    {
+        title: "Update website design",
+        description: "Revamp the existing website design to improve user experience and align with the latest design trends. Enhance visual aesthetics, optimize page load speed, and ensure responsiveness across different devices and screen sizes.",
+        status: "inProgress",
+        category: "design",
+        priority: "medium",
+        subtasks: [
+            { name: "Conduct user testing", status: "done" },
+            { name: "Optimize site navigation", status: "inProgress" }
+        ],
+        dueDate: "2022-06-30",
+        assignedTo: [contacts[2], contacts[3], contacts[4]],
+    },
+    {
+        title: "Review project proposal",
+        description: "Thoroughly review the project proposal and provide feedback on its feasibility, strategic alignment, and potential impact. Assess the proposed budget, timeline, and resource allocation. Identify any areas of improvement or concerns and communicate them to the project team.",
+        status: "awaitingFeedback",
+        category: "marketing",
+        priority: "low",
+        subtasks: [
+            { name: "Analyze cost-benefit ratio", status: "done" },
+            { name: "Evaluate risks and contingencies", status: "inProgress" }
+        ],
+        dueDate: "2022-07-15",
+        assignedTo: [contacts[1], contacts[4], contacts[3]],
+    },
+    {
+        title: "Prepare quarterly report",
+        description: "Compile financial data and analysis to create a comprehensive quarterly report for the management team. Include key performance indicators, budget analysis, and recommendations for improvement.",
+        status: "done",
+        category: "marketing",
+        priority: "urgent",
+        subtasks: [
+            { name: "Analyze revenue trends", status: "done" },
+            { name: "Summarize expenditure breakdown", status: "done" }
+        ],
+        dueDate: "2022-04-30",
+        assignedTo: [contacts[2], contacts[3], contacts[5]],
+    },
+];
 
 
 let categories = [{
