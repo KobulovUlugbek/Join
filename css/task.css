@@ -377,6 +377,20 @@ input[type="checkbox"] {
   border-radius: 8px;
   white-space: nowrap;
 }
+.content {
+  position: relative; /* Setzt den Bezugspunkt für die absolute Positionierung */
+}
+
+.dropdown-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-in-out; /* Animiert das Öffnen des Dropdowns */
+}
+
+.dropdown-content.expanded {
+  max-height: 300px; /* Maximale Höhe beim Öffnen des Dropdowns, anpassen nach Bedarf */
+}
+
 .content input {
   font-size: 18px;
   border-radius: 8px;
@@ -497,9 +511,13 @@ input[type="checkbox"] {
 }
 
 .expand-container {
-  overflow: hidden;
-  border-radius: 0 0 8px 8px;
-  background-color: white;
+  position: absolute;
+  width: 100%; /* Sorgt dafür, dass das Dropdown die gleiche Breite wie der Container hat */
+  z-index: 1000; /* Stellt das Dropdown über andere Inhalte */
+  background: white; /* Hintergrundfarbe, angepasst nach Bedarf */
+  border-radius: 0 0 8px 8px; /* Rundet nur die unteren Ecken */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Fügt einen Schatten für bessere Sichtbarkeit hinzu */
+  overflow: hidden; /* Verhindert, dass der Inhalt außerhalb des Containers angezeigt wird */
 }
 
 .contactCheckbox {
