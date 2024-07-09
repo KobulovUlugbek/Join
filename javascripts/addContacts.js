@@ -31,18 +31,25 @@ async function initContactList() {
   for (let i = 0; i < remoteContactsAsJSON.length; i++) {
     const contact = remoteContactsAsJSON[i];
     let name = contact.name;
-    let firstLetter = name.charAt(0);
-    if (!letters.includes(firstLetter)) {
-      letters.push(firstLetter);
+
+    // Check if name is a valid string before proceeding
+    if (typeof name === 'string' && name.length > 0) {
+      let firstLetter = name.charAt(0);
+
+      if (!letters.includes(firstLetter)) {
+        letters.push(firstLetter);
+      }
+      if (!contactsByLetter[firstLetter]) {
+        contactsByLetter[firstLetter] = [];
+      }
+      contactsByLetter[firstLetter].push(contact);
+    } else {
     }
-    if (!contactsByLetter[firstLetter]) {
-      contactsByLetter[firstLetter] = [];
-    }
-    contactsByLetter[firstLetter].push(contact);
   }
 
   renderContactList();
 }
+
 
 /**
  * Renders the contact list on the page.
